@@ -31,18 +31,11 @@
             <td>{{ tutorial.description }}</td>
             <td>
               <button class="btn btn-danger" @click="removeTutorials(tutorial.id)">delete</button>
-              <router-link :to="'/tutorials/' + tutorial.id" class="btn btn-warning">Edit</router-link>
+              <router-link :to="{ name: 'edit', params: { id: tutorial.id }}" class="btn btn-warning">Edit</router-link>
             </td>
           </tr>
         </tbody>
       </table>
-
-      <!-- <ul class="list-group">
-        <li class="list-group-item" :class="{ active: index == currentIndex }" v-for="(tutorial, index) in tutorials"
-          :key="index" @click="setActiveTutorial(tutorial, index)">
-          {{ tutorial.title }}
-        </li>
-      </ul> -->
 
       <button class="m-3 btn btn-sm btn-danger" @click="removeAllTutorials">
         Remove All
@@ -75,7 +68,7 @@
 import TutorialDataService from "/services/TutorialDataService";
 
 export default {
-  name: "tutorials-list",
+  name: "list",
   data() {
     return {
       tutorials: [],

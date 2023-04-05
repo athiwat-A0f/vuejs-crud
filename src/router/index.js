@@ -6,17 +6,21 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      alias: "/tutorials",
-      name: "tutorials",
+      name: "index",
+      component: () => import("../views/Homeview.vue")
+    },
+    {
+      path: "/admin/tutorials",
+      name: "list",
       component: () => import("../views/TutorialsList.vue")
     },
     {
-      path: "/tutorials/:id",
-      name: "tutorial-details",
+      path: "/admin/tutorials/:id",
+      name: "edit",
       component: () => import("../views/Tutorial.vue")
     },
     {
-      path: "/add",
+      path: "/admin/add",
       name: "add",
       component: () => import("../views/AddTutorial.vue")
     }

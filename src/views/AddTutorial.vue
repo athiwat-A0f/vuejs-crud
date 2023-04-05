@@ -31,7 +31,7 @@
     </div>
 
     <div class="col-12 mt-2">
-      <router-link :to="'/tutorials/'" class="btn btn-secondary">Back</router-link>
+      <router-link :to="{ name: 'list' }" class="btn btn-secondary">Back</router-link>
     </div>
   </div>
 </template>

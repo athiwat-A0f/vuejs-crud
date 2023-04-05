@@ -54,7 +54,7 @@
       <p>Please click on a Tutorial...</p>
     </div>
 
-    <router-link :to="'/tutorials/'" class="btn btn-secondary">Back</router-link>
+    <router-link :to="{ name: 'list' }" class="btn btn-secondary">Back</router-link>
   </div>
 </template>
   
@@ -62,7 +62,7 @@
 import TutorialDataService from "/services/TutorialDataService";
 
 export default {
-  name: "tutorial",
+  name: "add",
   data() {
     return {
       url: null,

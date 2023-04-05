@@ -8,7 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <router-link to="/" class="navbar-brand">Home</router-link>
+        <router-link :to="{ name: 'index' }" class="navbar-brand">Home</router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -16,12 +16,26 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link to="/tutorials" class="nav-link">Tutorials</router-link>
+              <router-link :to="{ name: 'list' }" class="nav-link">Tutorials</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/add" class="nav-link">Add</router-link>
+              <router-link :to="{ name: 'add' }" class="nav-link">Add</router-link>
             </li>
           </ul>
+          <form class="d-flex">
+            <button class="btn btn-outline-success" type="submit">Login</button>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Login
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li> -->
+          </form>
         </div>
       </div>
     </nav>

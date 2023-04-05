@@ -1,9 +1,13 @@
 <template>
   <div class="container-fluid">
     <div v-if="!submitted">
+      <div class="form-grop">
+        <td v-if="url"><img :src="url" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+        <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+      </div>
       <div class="form-group">
         <label for="title">Image</label>
-        <input type="file" class="form-control" id="title" @change="handleFileUpload( $event )" name="upload"/> 
+        <input type="file" class="form-control" id="title" @change="handleFileUpload( $event )" name="image"/> 
       </div>
 
       <div class="form-group">
@@ -39,6 +43,7 @@ export default {
   name: "add-tutorial",
   data() {
     return {
+      url: null,
       tutorial: {
         id: null,
         title: "",
@@ -51,17 +56,19 @@ export default {
   },
   methods: {
     handleFileUpload( event ) {
-      this.tutorial.upload = event.target.files[0];
-      console.log(event.target.files[0])
+      this.tutorial.image = event.target.files[0]
+      
+      this.url = URL.createObjectURL(this.tutorial.image)
     },
 
     saveTutorial() {
       var data = {
         title: this.tutorial.title,
         description: this.tutorial.description,
-        upload: this.tutorial.upload
+        image: this.tutorial.image
       };
-     
+      
+      console.log(data)
       TutorialDataService.create(data)
         .then(response => {
           this.tutorial.id = response.data.id;

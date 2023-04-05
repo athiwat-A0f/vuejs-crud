@@ -16,6 +16,7 @@
         <thead>
           <tr>
             <th scope="col">#</th>
+            <th scope="col">image</th>
             <th scope="col">title</th>
             <th scope="col">descrition</th>
             <th scope="col">tool</th>
@@ -24,6 +25,8 @@
         <tbody>
           <tr v-for="(tutorial, index) in tutorials" @click="setActiveTutorial(tutorial, index)">
             <th scope="row">{{ ++index }}</th>
+            <td v-if="tutorial.image"><img :src="'http://localhost:8080/uploads/' + tutorial.image" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+            <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
             <td>{{ tutorial.title }}</td>
             <td>{{ tutorial.description }}</td>
             <td>

@@ -3,10 +3,16 @@
     <div v-if="currentTutorial" class="edit-form">
       <h4>Tutorial</h4>
       <form>
+        <div class="form-grop" v-if="url">
+          <td><img :src="url" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+        </div>
+        <div class="form-grop" v-else>
+          <td v-if="currentTutorial.image"><img :src="'http://localhost:8080/uploads/' + currentTutorial.image" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+          <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+        </div>
         <div class="form-group">
           <label for="title">Image</label>
-          <img src="" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
-          <input type="file" class="form-control" id="title"  />
+          <input type="file" class="form-control" id="title" @change="handleFileUpload( $event )" name="image"/> 
         </div>
         <div class="form-group">
           <label for="title">Title</label>
@@ -59,11 +65,18 @@ export default {
   name: "tutorial",
   data() {
     return {
+      url: null,
       currentTutorial: null,
       message: ''
     };
   },
   methods: {
+    handleFileUpload( event ) {
+      this.currentTutorial.image = event.target.files[0];
+
+      this.url = URL.createObjectURL(this.currentTutorial.image)
+    },
+
     getTutorial(id) {
       TutorialDataService.get(id)
         .then(response => {
@@ -80,6 +93,7 @@ export default {
         id: this.currentTutorial.id,
         title: this.currentTutorial.title,
         description: this.currentTutorial.description,
+        // image: this.currentTutorial.image,
         published: status
       };
 

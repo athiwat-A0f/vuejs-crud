@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <label for="description">Description</label>
-          <input type="text" class="form-control" id="description" v-model="currentTutorial.description" />
+          <textarea class="form-control" id="description" required v-model="currentTutorial.description" name="description" />
         </div>
 
         <div class="form-group mt-2">

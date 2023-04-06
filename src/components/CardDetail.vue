@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div class="col mb-4" v-for="(tutorial, index) in tutorials">
-      <div class="card" style="width: 18rem;">
+    <div class="col mb-4">
+      <div class="card">
         <div>
           <span v-if="tutorial.image"><img :src="'http://localhost:8080/uploads/' + tutorial.image"
               class="card-img-top min_height" alt="..."></span>
@@ -10,8 +10,8 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">{{ tutorial.title }}</h5>
-          <p class="card-text">{{ (tutorial.description.length<100) ? tutorial.description : tutorial.description.substring(0, 100) + '...'  }}</p>
-          <router-link :to="{ name: 'detail', params: { id: tutorial.id } }">More...</router-link>
+          <p class="card-text">{{ tutorial.description }}</p>
+          <router-link :to="{ name: 'index' }" class="btn btn-secondary">Back</router-link>
         </div>
       </div>
     </div>
@@ -22,28 +22,30 @@
 import TutorialDataService from "/services/TutorialDataService";
 
 export default {
-  name: 'list-card',
+  name: "detail",
   data() {
     return {
-      tutorials: []
+      tutorial: [],
+      id: this.$route.params.id
     };
   },
   methods: {
-    retrieveTutorials() {
-      TutorialDataService.getAllPublished()
+    retrieveTutorial() {
+      // console.log(this.$route.params.id)
+      TutorialDataService.get(this.id)
         .then(response => {
-          this.tutorials = response.data;
-          console.log(response.data)
+          this.tutorial = response.data;
+          console.log(response.data);
         })
         .catch(e => {
           console.log(e);
-        })
+        });
     }
   },
   mounted() {
-    this.retrieveTutorials();
+    this.retrieveTutorial();
   }
-} 
+};
 </script>
  
 <style>

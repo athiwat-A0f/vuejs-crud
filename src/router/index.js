@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: "/admin/tutorials/:id",
       name: "edit",
-      component: () => import("../views/Tutorial.vue")
+      component: () => import("../views/EditTutorial.vue")
     },
     {
       path: "/admin/add",

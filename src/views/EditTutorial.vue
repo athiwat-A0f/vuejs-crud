@@ -4,15 +4,19 @@
       <h4>Tutorial</h4>
       <form>
         <div class="form-grop" v-if="url">
-          <td><img :src="url" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+          <td><img :src="url"
+              class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
         </div>
         <div class="form-grop" v-else>
-          <td v-if="currentTutorial.image"><img :src="'http://localhost:8080/uploads/' + currentTutorial.image" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
-          <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+          <td v-if="currentTutorial.image"><img :src="'http://localhost:8080/uploads/' + currentTutorial.image"
+              class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+          <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'"
+              class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
         </div>
         <div class="form-group">
           <label for="title">Image</label>
-          <input type="file" class="form-control" id="title" @change="handleFileUpload( $event )" name="image"/> 
+          <input type="file" class="form-control" id="title" @change="handleFileUpload($event)" name="image"
+            accept="image/*" ref="fileupload" />
         </div>
         <div class="form-group">
           <label for="title">Title</label>
@@ -20,7 +24,8 @@
         </div>
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea class="form-control" id="description" required v-model="currentTutorial.description" name="description" />
+          <textarea class="form-control" id="description" required v-model="currentTutorial.description"
+            name="description" />
         </div>
 
         <div class="form-group mt-2">
@@ -36,11 +41,11 @@
         <button v-else class="btn btn-primary mr-2" @click="updatePublished(true)">
           Publish
         </button>
-  
+
         <button class="btn btn-danger mr-2" @click="deleteTutorial">
           Delete
         </button>
-  
+
         <button type="submit" class="btn btn-success" @click="updateTutorial">
           Update
         </button>
@@ -60,9 +65,10 @@
   
 <script>
 import TutorialDataService from "/services/TutorialDataService";
+import Swal from 'sweetalert2'
 
 export default {
-  name: "add",
+  name: "edit",
   data() {
     return {
       url: null,
@@ -71,10 +77,24 @@ export default {
     };
   },
   methods: {
-    handleFileUpload( event ) {
-      this.currentTutorial.image = event.target.files[0];
+    handleFileUpload(event) {
+      // console.log(event.target.files[0].type)
+      const type = event.target.files[0].type.split('/')[0]
 
-      this.url = URL.createObjectURL(this.currentTutorial.image)
+      if (type != 'image') {
+        this.$refs.fileupload.value = null;
+        this.url = 'http://localhost:8080/uploads/no-image.jpg';
+        console.log(this.url)
+        Swal.fire({
+          title: 'Error!',
+          text: 'upload only image!',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+      } else {
+        this.currentTutorial.image = event.target.files[0]
+        this.url = URL.createObjectURL(this.currentTutorial.image)
+      }
     },
 
     getTutorial(id) {
@@ -141,5 +161,4 @@ export default {
 .edit-form {
   max-width: 300px;
   margin: auto;
-}
-</style>
+}</style>

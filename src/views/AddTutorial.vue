@@ -7,7 +7,7 @@
       </div>
       <div class="form-group">
         <label for="title">Image</label>
-        <input type="file" class="form-control" id="title" @change="handleFileUpload( $event )" name="image"/> 
+        <input type="file" class="form-control" id="title" @change="handleFileUpload( $event )" name="image" accept="image/*" ref="fileupload"/> 
       </div>
 
       <div class="form-group">
@@ -38,9 +38,10 @@
   
 <script>
 import TutorialDataService from "/services/TutorialDataService";
+import Swal from 'sweetalert2'
 
 export default {
-  name: "add-tutorial",
+  name: "add",
   data() {
     return {
       url: null,
@@ -56,9 +57,23 @@ export default {
   },
   methods: {
     handleFileUpload( event ) {
-      this.tutorial.image = event.target.files[0]
+      // console.log(event.target.files[0].type)
+      const type = event.target.files[0].type.split('/')[0]
       
-      this.url = URL.createObjectURL(this.tutorial.image)
+      if(type!='image') {
+        this.$refs.fileupload.value=null;
+        this.url = 'http://localhost:8080/uploads/no-image.jpg';
+
+        Swal.fire({
+          title: 'Error!',
+          text: 'upload only image!',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+      } else {
+        this.tutorial.image = event.target.files[0]
+        this.url = URL.createObjectURL(this.tutorial.image)
+      }
     },
 
     saveTutorial() {

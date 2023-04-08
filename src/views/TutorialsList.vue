@@ -23,17 +23,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(tutorial, index) in tutorials" @click="setActiveTutorial(tutorial, index)">
+          <tr v-if="tutorials.length" v-for="(tutorial, index) in tutorials" @click="setActiveTutorial(tutorial, index)">
             <th scope="row">{{ ++index }}</th>
-            <td v-if="tutorial.image"><img :src="'http://localhost:8080/uploads/' + tutorial.image" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
-            <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+            <td v-if="tutorial.image"><img :src="'http://localhost:8080/uploads/' + tutorial.image"
+                class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+            <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'"
+                class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
             <td>{{ tutorial.title }}</td>
             <td>{{ tutorial.description }}</td>
             <td>
               <button class="btn btn-danger" @click="removeTutorials(tutorial.id)">delete</button>
-              <router-link :to="{ name: 'edit', params: { id: tutorial.id }}" class="btn btn-warning">Edit</router-link>
+              <router-link :to="{ name: 'edit', params: { id: tutorial.id } }" class="btn btn-warning">Edit</router-link>
             </td>
           </tr>
+          <tr v-else>Not Found Data!</tr>
         </tbody>
       </table>
 
@@ -121,7 +124,7 @@ export default {
           console.log(e);
         });
     },
-  
+
     searchTitle() {
       TutorialDataService.findByTitle(this.title)
         .then(response => {

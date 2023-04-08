@@ -1,11 +1,11 @@
 <template>
   <div class="row">
-    <div class="col mb-4" v-for="(tutorial, index) in tutorials">
+    <div class="col mb-4" v-if="tutorials.length" v-for="(tutorial, index) in tutorials">
       <div class="card" style="width: 18rem;">
         <div>
           <span v-if="tutorial.image"><img :src="'http://localhost:8080/uploads/' + tutorial.image"
-              class="card-img-top min_height" alt="..."></span>
-          <span v-else><img src="http://localhost:8080/uploads/no-image.jpg" class="card-img-top min_height"
+              class="card-img-top" alt="..."></span>
+          <span v-else><img src="http://localhost:8080/uploads/no-image.jpg" class="card-img-top"
               alt="..."></span>
         </div>
         <div class="card-body">
@@ -15,6 +15,7 @@
         </div>
       </div>
     </div>
+    <div v-else class="no_content">Not have content!</div>
   </div>
 </template>
 
@@ -47,7 +48,21 @@ export default {
 </script>
  
 <style>
-.min_height {
+.card-img-top {
   min-height: 285px;
+}
+
+.card-title {
+  min-height: 60px;
+  overflow: hidden;
+}
+
+.card-text {
+  min-height: 120px;
+}
+
+.no_content {
+  text-align: center;
+  background-color: tomato;
 }
 </style>

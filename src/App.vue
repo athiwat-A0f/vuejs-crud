@@ -43,6 +43,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="container mt-3">
       <router-view />
     </div>
+
+    <footer>copyright@{{ new Date().getFullYear() }}</footer>
   </div>
 </template>
 
@@ -83,3 +85,17 @@ export default {
 
 };
 </script>
+
+
+<style>
+
+footer {
+ position: fixed;
+ bottom: 0;
+ width: 100%;
+ left: 0;
+ background-color: #212529;
+ color: white;
+}
+
+</style>

@@ -1,5 +1,7 @@
 <template>
   <div class="container-fluid">
+    <h5>email: admin@admin.com</h5> 
+    <h5>password: admin1234</h5> <hr>
     <div class="card">
       <h5 class="card-header">Login</h5>
       <div class="card-body">
@@ -49,18 +51,8 @@ export default {
       // console.log(this.password)
       if(this.email=='admin@admin.com' && this.password=='admin1234') {
         sessionStorage.setItem("userId", "1");
-        
-        Swal.fire({
-          title: 'Success!',
-          text: 'Login Success!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        })
 
-        setTimeout(() => {
-          // this.$router.replace('/')
-          window.location.replace('/')
-        }, 2000);
+        window.location.replace('/')
 
       } else {
         this.email = "";

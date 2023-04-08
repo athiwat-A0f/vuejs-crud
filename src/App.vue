@@ -47,6 +47,8 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
   name: "app",
   data() {
@@ -66,6 +68,15 @@ export default {
 
   mounted() {
     this.id = sessionStorage.getItem("userId")
+
+    if(this.id) {
+      Swal.fire({
+          title: 'Success!',
+          text: 'Login Success!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+    }
   }
 
 

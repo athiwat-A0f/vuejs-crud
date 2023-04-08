@@ -14,7 +14,7 @@ import { RouterLink, RouterView } from 'vue-router'
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul v-if="id" class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <router-link :to="{ name: 'list' }" class="nav-link">Tutorials</router-link>
             </li>
@@ -22,19 +22,20 @@ import { RouterLink, RouterView } from 'vue-router'
               <router-link :to="{ name: 'add' }" class="nav-link">Add</router-link>
             </li>
           </ul>
-          <form class="d-flex">
-            <button class="btn btn-outline-success" type="submit">Login</button>
-            <!-- <li class="nav-item dropdown">
+         
+          <form class="d-flex" v-if="id">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Login
+                admin
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="#">profile</a></li>
+                <li><a class="dropdown-item" href="#" @click="handleLogout">Logout</a></li>
               </ul>
-            </li> -->
+            </li>
+          </form>
+          <form class="d-flex" v-else>
+            <router-link :to="{ name: 'login' }" class="btn btn-outline-success">Login</router-link>
           </form>
         </div>
       </div>
@@ -47,6 +48,27 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <script>
 export default {
-  name: "app"
+  name: "app",
+  data() {
+    return {
+      id: null
+    }
+  },
+
+  methods: {
+    handleLogout() {
+      sessionStorage.removeItem("userId");
+  
+      this.id = null
+    }
+
+  },
+
+  mounted() {
+    this.id = sessionStorage.getItem("userId")
+  }
+
+
+
 };
 </script>

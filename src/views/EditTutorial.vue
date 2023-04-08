@@ -25,7 +25,7 @@
         <div class="form-group">
           <label for="description">Description</label>
           <textarea class="form-control" id="description" required v-model="currentTutorial.description"
-            name="description" />
+            name="description" rows="10"/>
         </div>
 
         <div class="form-group mt-2">
@@ -65,7 +65,6 @@
   
 <script>
 import TutorialDataService from "/services/TutorialDataService";
-import Swal from 'sweetalert2'
 
 export default {
   name: "edit",
@@ -85,9 +84,9 @@ export default {
         this.$refs.fileupload.value = null;
         this.url = 'http://localhost:8080/uploads/no-image.jpg';
         console.log(this.url)
-        Swal.fire({
+        this.$swal.fire({
           title: 'Error!',
-          text: 'upload only image!',
+          text: 'only upload image!',
           icon: 'error',
           confirmButtonText: 'OK'
         })

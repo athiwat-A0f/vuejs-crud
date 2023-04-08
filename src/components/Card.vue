@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div class="col mb-4" v-if="tutorials.length" v-for="(tutorial, index) in tutorials">
-      <div class="card" style="width: 18rem;">
+    <div class="col-sm-4" v-if="tutorials.length" v-for="(tutorial, index) in tutorials">
+      <div class="card">
         <div>
           <span v-if="tutorial.image"><img :src="'http://localhost:8080/uploads/' + tutorial.image"
               class="card-img-top" alt="..."></span>
@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">{{ tutorial.title }}</h5>
-          <p class="card-text">{{ (tutorial.description.length<100) ? tutorial.description : tutorial.description.substring(0, 100) + '...'  }}</p>
+          <p class="card-text">{{ (tutorial.description.length<150) ? tutorial.description : tutorial.description.substring(0, 150) + '...'  }}</p>
           <router-link :to="{ name: 'detail', params: { id: tutorial.id } }">More...</router-link>
         </div>
       </div>

@@ -1,34 +1,38 @@
 <template>
   <div class="container-fluid">
-    <div v-if="!submitted">
-      <div class="form-grop">
-        <td v-if="url"><img :src="url" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
-        <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
-      </div>
-      <div class="form-group">
-        <label for="title">Image</label>
-        <input type="file" class="form-control" id="title" @change="handleFileUpload( $event )" name="image" accept="image/*" ref="fileupload"/> 
-      </div>
-
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" required v-model="tutorial.title" name="title" />
-      </div>
-
-      <div class="form-group mb-2">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" required v-model="tutorial.description" name="description" />
-      </div>
-
-      <div class="col-12">
-        <button @click="saveTutorial" class="btn btn-success">Submit</button>
+    <div class="row">
+      <div class="col-6">
+        <div v-if="!submitted">
+          <div class="form-grop">
+            <td v-if="url"><img :src="url" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+            <td v-else><img :src="'http://localhost:8080/uploads/no-image.jpg'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+          </div>
+          <div class="form-group">
+            <label for="title">Image</label>
+            <input type="file" class="form-control" id="title" @change="handleFileUpload( $event )" name="image" accept="image/*" ref="fileupload"/> 
+          </div>
+    
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" required v-model="tutorial.title" name="title" />
+          </div>
+    
+          <div class="form-group mb-2">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" required v-model="tutorial.description" name="description" rows="10" />
+          </div>
+    
+          <div class="col-12">
+            <button @click="saveTutorial" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+        <div v-else>
+          <h4>You submitted successfully!</h4>
+          <button class="btn btn-success" @click="newTutorial">Add</button>
+        </div>
       </div>
     </div>
 
-    <div v-else>
-      <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newTutorial">Add</button>
-    </div>
 
     <div class="col-12 mt-2">
       <router-link :to="{ name: 'list' }" class="btn btn-secondary">Back</router-link>
@@ -38,7 +42,6 @@
   
 <script>
 import TutorialDataService from "/services/TutorialDataService";
-import Swal from 'sweetalert2'
 
 export default {
   name: "add",
@@ -64,9 +67,9 @@ export default {
         this.$refs.fileupload.value=null;
         this.url = 'http://localhost:8080/uploads/no-image.jpg';
 
-        Swal.fire({
+        this.$swal.fire({
           title: 'Error!',
-          text: 'upload only image!',
+          text: 'only upload image!',
           icon: 'error',
           confirmButtonText: 'OK'
         })

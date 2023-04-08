@@ -34,9 +34,6 @@
 </template>
   
 <script>
-import TutorialDataService from "/services/TutorialDataService";
-import Swal from 'sweetalert2'
-
 export default {
   name: "add",
   data() {
@@ -58,7 +55,7 @@ export default {
         this.email = "";
         this.password = "";
 
-        Swal.fire({
+        this.$swal.fire({
           title: 'Error!',
           text: 'Email Or Password are not correct!',
           icon: 'error',

@@ -1,5 +1,5 @@
 <template>
-  <div class="list row">
+  <div class="row">
     <div class="col-md-8">
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Search by title" v-model="title" />
@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <h4>Tutorials List</h4>
       <table class="table table-striped table-hover">
         <thead>
@@ -143,10 +143,4 @@ export default {
 };
 </script>
 
-<style>
-.list {
-  text-align: left;
-  max-width: 750px;
-  margin: auto;
-}
-</style>
+<style></style>

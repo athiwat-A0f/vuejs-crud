@@ -82,6 +82,12 @@ export default {
   },
   methods: {
     retrieveTutorials() {
+      // console.log('retrieveTutorials',this.$store.state.auth.user.roles.includes('ROLE_ADMIN'))
+      // if (!this.$store.state.auth.user.roles.includes('ROLE_ADMIN')) {
+      //   this.$router.push('/');
+      //   return
+      // }
+
       TutorialDataService.getAll()
         .then(response => {
           this.tutorials = response.data;
@@ -93,6 +99,7 @@ export default {
     },
 
     refreshList() {
+      console.log('refreshList')
       this.retrieveTutorials();
       this.currentTutorial = null;
       this.currentIndex = -1;

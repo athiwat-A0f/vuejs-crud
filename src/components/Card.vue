@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-sm-4" v-if="tutorials.length" v-for="(tutorial, index) in tutorials">
+    <div class="col-xs-4 col-md-4" v-if="tutorials.length" v-for="(tutorial, index) in tutorials">
       <div class="card">
         <div>
           <span v-if="tutorial.image"><img :src="'http://localhost:8080/uploads/' + tutorial.image"
@@ -65,4 +65,11 @@ export default {
   text-align: center;
   background-color: tomato;
 }
+
+@media only screen and (max-width: 1000px) {
+  .card-text {
+    height: 240px;
+  }
+}
+
 </style>

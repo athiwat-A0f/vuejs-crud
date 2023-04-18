@@ -10,8 +10,11 @@
         </div>
       </div>
     </div>
+    <h4>Tutorials List</h4>
+    <div class="col-md-12 text-right">
+      <router-link :to="{ name: 'add' }" class="btn btn-primary">Add</router-link>
+    </div>
     <div class="col-md-12">
-      <h4>Tutorials List</h4>
       <table class="table table-striped table-hover">
         <thead>
           <tr>
@@ -32,8 +35,8 @@
             <td>{{ tutorial.title }}</td>
             <td>{{ tutorial.description }}</td>
             <td>
-              <button class="btn btn-danger" @click="removeTutorials(tutorial.id)">delete</button>
               <router-link :to="{ name: 'edit', params: { id: tutorial.id } }" class="btn btn-warning">Edit</router-link>
+              <button class="btn btn-danger" @click="removeTutorials(tutorial.id)">delete</button>
             </td>
           </tr>
           <tr v-else>Not Found Data!</tr>
@@ -150,4 +153,7 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+
+</style>

@@ -1,5 +1,4 @@
 <template>
-  <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <!-- <a href="/" class="navbar-brand">home</a> -->
       <div class="navbar-nav mr-auto">
@@ -52,7 +51,6 @@
     </div>
 
     <footer>copyright@{{ new Date().getFullYear() }}</footer>
-  </div>
 </template>
 
 <script>
@@ -87,6 +85,10 @@ export default {
 
 
 <style>
+
+.router-link-exact-active {
+    color: var(--bs-navbar-active-color) !important;
+}
 
 footer {
  position: fixed;
